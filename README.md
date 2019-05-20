@@ -21,6 +21,9 @@ https://drive.google.com/drive/u/0/folders/1fdfQepiQvmgqkMczGpaaXIRADW1UBccx
 * The main project architecture document is located here
 https://docs.google.com/document/d/10vjmwJbInl0zlbtk0n8_uHTuDel-48mjWQMJCSg8D3M/edit
 
+*Draft workflow diagram:
+https://docs.google.com/presentation/d/18LLyXTuPabaJ6IC9bcQez5bQfC4l5_dh1hKmZ1cl9HI/edit?usp=sharing
+
 * Additional documentation that is not in Google Doc format should be located in this
 repository under `documentation`.
 
