@@ -26,7 +26,7 @@ https://docs.google.com/document/d/10vjmwJbInl0zlbtk0n8_uHTuDel-48mjWQMJCSg8D3M/
     https://docs.google.com/presentation/d/18LLyXTuPabaJ6IC9bcQez5bQfC4l5_dh1hKmZ1cl9HI/edit?usp=sharing
 
     * LinkageJS: HVAC and control systems modeling
-    https://docs.google.com/presentation/d/1VIdJySXRIQeROHKclz0Q6dOcRMQMvKVzg-l5WZ4b9q8
+    https://docs.google.com/presentation/d/1VIdJySXRIQeROHKclz0Q6dOcRMQMvKVzg-l5WZ4b9q8/edit?usp=sharing
 
 * Additional documentation that is not in Google Doc format should be located in this
 repository under `documentation`.
