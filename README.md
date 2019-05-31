@@ -29,7 +29,7 @@ https://docs.google.com/document/d/10vjmwJbInl0zlbtk0n8_uHTuDel-48mjWQMJCSg8D3M/
     https://docs.google.com/presentation/d/1VIdJySXRIQeROHKclz0Q6dOcRMQMvKVzg-l5WZ4b9q8/edit?usp=sharing
     
     * Swim diagram combining both of the previous diagrams
-    https://docs.google.com/presentation/d/1ZtyoPWyK3jAvhL3p7_RiunHaGq8eH7BdEGlMBoGQr5k/edit#slide=id.p
+    https://docs.google.com/presentation/d/1ZtyoPWyK3jAvhL3p7_RiunHaGq8eH7BdEGlMBoGQr5k/edit?usp=sharing
 
 * Additional documentation that is not in Google Doc format should be located in this
 repository under `documentation`.
