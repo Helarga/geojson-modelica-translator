@@ -24,5 +24,8 @@ https://docs.google.com/presentation/d/1ZtyoPWyK3jAvhL3p7_RiunHaGq8eH7BdEGlMBoGQ
 * GeoJSON -> Modelica Translator Design
 https://docs.google.com/document/d/13bWKpY27gRG7sIDrATx-xMQ59dgJeanIeXVfHmI_sFU/edit#heading=h.ms7jc86nd9mj
 
+* General Architecture Overview Document
+https://drive.google.com/file/d/1bnHW8HJN7CAjEmt-Y-GQTnT9We-oIW2V/view?usp=sharing
+
 * Additional documentation that is not in Google Doc format should be located in this
 repository under `documentation`.
