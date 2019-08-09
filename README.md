@@ -8,7 +8,7 @@ https://github.com/NREL/URBANopt-Modelica/projects.
 
 2. Software that is "glue code" should be committed here. On the other hand,
 Modelica models should be located in Modelica Buildings Library,
-https://github.com/lbl-srg/modelica-buildings/tree/issue1437_district_heating_cooling/Buildings.
+https://github.com/lbl-srg/modelica-buildings/tree/issue1437_district_heating_cooling/Buildings/Applications.
 
 ## Important Documents
 
