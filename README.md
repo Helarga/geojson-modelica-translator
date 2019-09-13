@@ -6,9 +6,12 @@ There are two primary purposes for this repository.
 1. The development team will use one or more GitHub project boards to track progress,
 https://github.com/NREL/URBANopt-Modelica/projects.
 
-2. Software that is "glue code" should be committed here. On the other hand,
+2. Software that is "glue code" should be committed here. 
+\
+On the other hand,
 Modelica models should be located in Modelica Buildings Library,
-https://github.com/lbl-srg/modelica-buildings/tree/issue1437_district_heating_cooling/Buildings/Applications.
+https://github.com/lbl-srg/modelica-buildings/tree/issue1437_district_heating_cooling/Buildings/Applications \
+(Use `[ci skip]` at the end of your last commit message before pushing a development branch to `modelica-buildings` if continuous integration testing on the whole library is not required.)
 
 ## Important Documents
 
