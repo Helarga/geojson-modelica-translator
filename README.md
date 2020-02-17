@@ -3,8 +3,7 @@
 This is the repository for things related to the Modelica version of URBANopt.
 There are two primary purposes for this repository.
 
-1. The development team will use one or more GitHub project boards to track progress,
-https://github.com/NREL/URBANopt-Modelica/projects.
+1. The development team will use one or more GitHub project boards to track progress. The project board is an organization project board which allows us to link other repos easily, https://github.com/orgs/urbanopt/projects/6.
 
 2. Software that is "glue code" should be committed here. 
 \
