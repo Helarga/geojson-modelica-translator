@@ -1,24 +1,23 @@
 within {{project_name}}.Loads.{{model_name}};
 model building
    "n-zone EnergyPlus building model based on URBANopt GeoJSON export, with distribution pumps"
-
 extends Buildings.Applications.DHC.Loads.BaseClasses.PartialBuilding(
    redeclare package Medium = MediumW,
    have_eleHea=false,
    have_eleCoo=false,
    have_weaBus=false);
 
- replaceable package MediumW = Buildings.Media.Water
-   "Source side medium";
- replaceable package MediumA = Buildings.Media.Air
-   "Load side medium";
+  replaceable package MediumW = Buildings.Media.Water
+    "Source side medium";
+  replaceable package MediumA = Buildings.Media.Air
+    "Load side medium";
   parameter Real facSca = 1
     "Scaling factor to be applied to each extensive quantity";
   parameter Integer nZon={{data['thermal_zones_count']}}
-   "Number of thermal zones";
+    "Number of thermal zones";
   parameter String idfPat=
     "modelica://{{project_name}}/Loads/{{data['load_resources_path']}}/{{data['idf']['filename']}}"
-    "Path of the IDF file";
+   "Path of the IDF file";
   parameter String weaPat=
     "modelica://{{project_name}}/Loads/{{data['load_resources_path']}}/{{data['mos_weather']['filename']}}"
     "Path of the weather file";
@@ -28,11 +27,11 @@ extends Buildings.Applications.DHC.Loads.BaseClasses.PartialBuilding(
 
   {% raw %}
   Buildings.Controls.OBC.CDL.Continuous.Sources.Constant minTSet[nZon](
-      k=fill(20+273.15, nZon))
+    k=fill(20+273.15, nZon))
     "Minimum temperature setpoint"
     annotation (Placement(transformation(extent={{-220,60},{-200,80}})));
   Buildings.Controls.OBC.CDL.Continuous.Sources.Constant maxTSet[nZon](
-     k=fill(24+273.15, nZon))
+    k=fill(24+273.15, nZon))
     "Maximum temperature setpoint"
     annotation (Placement(transformation(extent={{-220,20},{-200,40}})));
   Modelica.Blocks.Sources.Constant qConGai_flow(k=0) "Convective heat gain"
@@ -46,41 +45,43 @@ extends Buildings.Applications.DHC.Loads.BaseClasses.PartialBuilding(
   {% endraw %}
   // TODO: apply a dynamic layout
     {% for zone in data['thermal_zones'] %}
-    Buildings.ThermalZones.EnergyPlus.ThermalZone {{zone['modelica_object_name']}}(
-      redeclare package Medium = MediumA,
-      nPorts=2,
-      zoneName="{{zone['spawn_object_name']}}") "Thermal zone"
-      {% raw %} annotation (Placement(transformation(extent={{40,-20},{80,20}}))); {% endraw %}
+  Buildings.ThermalZones.EnergyPlus.ThermalZone {{zone['modelica_object_name']}}(
+   redeclare package Medium = MediumA,
+   nPorts=2,
+   zoneName="{{zone['spawn_object_name']}}")
+    "Thermal zone"
+      {% raw %}
+    annotation (Placement(transformation(extent={{40,-20},{80,20}}))); {% endraw %}
     {% endfor %}
 
   {% raw %}
-inner Buildings.ThermalZones.EnergyPlus.Building building(
-       idfName=Modelica.Utilities.Files.loadResource(idfPat),
-       weaName=Modelica.Utilities.Files.loadResource(weaPat),
-       showWeatherData=false)
-       "Building outer component"
-     annotation (Placement(transformation(extent={{40,60},{60,80}})));
+ inner Buildings.ThermalZones.EnergyPlus.Building building(
+    idfName=Modelica.Utilities.Files.loadResource(idfPat),
+    weaName=Modelica.Utilities.Files.loadResource(weaPat),
+    showWeatherData=false)
+    "Building outer component"annotation (Placement(transformation(extent={{40,60},{60,80}})));
 
  Buildings.Controls.OBC.CDL.Continuous.MultiSum mulSum(nin=nZon)
-   annotation (Placement(transformation(extent={{260,110},{280,130}})));
+    annotation (Placement(transformation(extent={{260,110},{280,130}})));
  Buildings.Controls.OBC.CDL.Continuous.MultiSum mulSum3(nin=2) if have_pum
-   annotation (Placement(transformation(extent={{260,70},{280,90}})));
+    annotation (Placement(transformation(extent={{260,70},{280,90}})));
 
  Buildings.Applications.DHC.Loads.Examples.BaseClasses.FanCoil4Pipe terUni[nZon](
-   redeclare package Medium1 = MediumW,
-   redeclare package Medium2 = MediumA,
-   each facSca=facSca,
-   QHea_flow_nominal={50000,10000,10000,10000,10000,10000},
-   QCoo_flow_nominal={-10000,-10000,-10000,-10000,-10000,-10000},
-   each T_aLoaHea_nominal=293.15,
-   each T_aLoaCoo_nominal=297.15,
-   each T_bHeaWat_nominal=308.15,
-   each T_bChiWat_nominal=285.15,
-   each T_aHeaWat_nominal=313.15,
-   each T_aChiWat_nominal=280.15,
-   each mLoaHea_flow_nominal=5,
-   each mLoaCoo_flow_nominal=5) "Terminal unit"
-   annotation (Placement(transformation(extent={{-140,-2},{-120,20}})));
+    redeclare package Medium1 = MediumW,
+    redeclare package Medium2 = MediumA,
+    each facSca=facSca,
+    QHea_flow_nominal={50000,10000,10000,10000,10000,10000},
+    QCoo_flow_nominal={-10000,-10000,-10000,-10000,-10000,-10000},
+    each T_aLoaHea_nominal=293.15,
+    each T_aLoaCoo_nominal=297.15,
+    each T_bHeaWat_nominal=308.15,
+    each T_bChiWat_nominal=285.15,
+    each T_aHeaWat_nominal=313.15,
+    each T_aChiWat_nominal=280.15,
+    each mLoaHea_flow_nominal=5,
+    each mLoaCoo_flow_nominal=5)
+    "Terminal unit"
+    annotation (Placement(transformation(extent={{-140,-2},{-120,20}})));
 
   Buildings.Applications.DHC.Loads.BaseClasses.FlowDistribution disFloHea(
     redeclare package Medium = MediumW,
@@ -209,7 +210,12 @@ Documentation( info="<html>
  and connected to the room model by means of fluid ports.
 </p>
 </html>", revisions="<html>
-<ul><li>
+<ul>
+<li>
+April 1o, 2020: Nicholas Long<br/>
+Propagate the Boolean parameter have_pum to assure model scalability.
+</li>
+<li>
 March 12, 2020: Nicholas Long<br/>
 Updated implemention to handle template needed for GeoJSON to Modelica.
 </li>
