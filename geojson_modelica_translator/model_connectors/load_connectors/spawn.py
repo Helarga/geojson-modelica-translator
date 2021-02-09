@@ -1,6 +1,6 @@
 """
 ****************************************************************************************************
-:copyright (c) 2019-2020 URBANopt, Alliance for Sustainable Energy, LLC, and other contributors.
+:copyright (c) 2019-2021 URBANopt, Alliance for Sustainable Energy, LLC, and other contributors.
 
 All rights reserved.
 
@@ -21,9 +21,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
 FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
 CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUR
-
-EMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
 DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
 IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
 OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -194,12 +192,16 @@ class Spawn(LoadBase):
             )
             new_package.save()
 
-        # now create the Loads level package. This (for now) will create the package without considering any existing
-        # files in the Loads directory.
-        package = PackageParser.new_from_template(
-            scaffold.loads_path.files_dir, "Loads", building_names, within=f"{scaffold.project_name}"
-        )
-        package.save()
+        # now create the Loads level package and package.order.
+        if not os.path.exists(os.path.join(scaffold.loads_path.files_dir, 'package.mo')):
+            load_package = PackageParser.new_from_template(
+                scaffold.loads_path.files_dir, "Loads", building_names, within=f"{scaffold.project_name}"
+            )
+            load_package.save()
+        else:
+            load_package = PackageParser(os.path.join(scaffold.loads_path.files_dir))
+            load_package.add_model(building_names[0])
+            load_package.save()
 
         # now create the Package level package. This really needs to happen at the GeoJSON to modelica stage, but
         # do it here for now to aid in testing.
